@@ -32,42 +32,42 @@ public class MyLinkedList<T> extends AbstractList<T> {
 
     protected class MyListIterator implements ListIterator<T> {
 
-	boolean hasNext() {
+	boolean hasNext() {// Tara
 
 	}
 
 	// Return true if there are more elements when going in the forward direction.
-	T next() {
+	T next() {// Tara
 
 	}
 
 	// Return the next element in the list when going forward.
 	// Throw NoSuchElementException if there is no such element
-	boolean hasPrevious() {
+	boolean hasPrevious() {// charles
 
 	}
 
 	// Return true if there are more elements when going in the reverse direction.
-	T previous() {
+	T previous() {// charles
 
 	}
 
 	// Return the next element in the list when going backwards.
 	// Throw NoSuchElementException if there is no such element
-	int nextIndex() {
+	int nextIndex() {// Tara
 
 	}
 
 	// Return the index of the element that would be returned by a call to next()
 	// Return the list size if at the end of the list
-	int previousIndex() {
+	int previousIndex() {// tara
 
 	}
 
 	// Return the index of the element that would be returned by a call to
 	// previous()
 	// Return -1 if at the start of the list
-	void set(T x) {
+	void set(T x) {// charles
 
 	}
 
@@ -76,7 +76,7 @@ public class MyLinkedList<T> extends AbstractList<T> {
 	// Throw an IllegalStateException if neither next nor previous were called
 	// Throw an IllegalStateException if add or remove have been called since the
 	// most recent next/previous
-	void remove() {
+	void remove() {// tara
 
 	}
 
@@ -85,7 +85,7 @@ public class MyLinkedList<T> extends AbstractList<T> {
 	// Throw an IllegalStateException if neither next nor previous were called
 	// Throw an IllegalStateException if add has been called since the most recent
 	// next/previous
-	void add(T x) {
+	void add(T x) {// charles
 
 	}
 	// Insert the given item into the list immediately before whatever would have
