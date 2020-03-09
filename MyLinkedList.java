@@ -6,6 +6,7 @@
 //
 //
 import java.util.AbstractList;
+import java.util.ListIterator;
 
 public class MyLinkedList<T> extends AbstractList<T> {
 
@@ -29,11 +30,71 @@ public class MyLinkedList<T> extends AbstractList<T> {
 	}
     }
 
-    // protected class MyListIterator implements ListIterator<T> {
+    protected class MyListIterator implements ListIterator<T> {
 
-    // TODO - your code here
+	boolean hasNext() {
 
-    // }
+	}
+
+	// Return true if there are more elements when going in the forward direction.
+	T next() {
+
+	}
+
+	// Return the next element in the list when going forward.
+	// Throw NoSuchElementException if there is no such element
+	boolean hasPrevious() {
+
+	}
+
+	// Return true if there are more elements when going in the reverse direction.
+	T previous() {
+
+	}
+
+	// Return the next element in the list when going backwards.
+	// Throw NoSuchElementException if there is no such element
+	int nextIndex() {
+
+	}
+
+	// Return the index of the element that would be returned by a call to next()
+	// Return the list size if at the end of the list
+	int previousIndex() {
+
+	}
+
+	// Return the index of the element that would be returned by a call to
+	// previous()
+	// Return -1 if at the start of the list
+	void set(T x) {
+
+	}
+
+	// Change the value in the node returned by the most recent next/previous with
+	// the new value.
+	// Throw an IllegalStateException if neither next nor previous were called
+	// Throw an IllegalStateException if add or remove have been called since the
+	// most recent next/previous
+	void remove() {
+
+	}
+
+	// Remove the last element returned by the most recent call to either
+	// next/previous
+	// Throw an IllegalStateException if neither next nor previous were called
+	// Throw an IllegalStateException if add has been called since the most recent
+	// next/previous
+	void add(T x) {
+
+	}
+	// Insert the given item into the list immediately before whatever would have
+	// been returned by a call to next()
+	// The new item is inserted before the current cursor, so it would be returned
+	// by a call to previous() immediately following.
+	// The value of nextIndex or previousIndex both are increased by one
+
+    }
 
     public MyLinkedList() {
 	head = new Node();
