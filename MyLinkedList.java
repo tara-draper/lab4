@@ -13,6 +13,7 @@ public class MyLinkedList<T> extends AbstractList<T> {
     Node head;
     Node tail;
     int size;
+    int mod_count = 0;
 
     protected class Node {
 	T data;
@@ -31,6 +32,7 @@ public class MyLinkedList<T> extends AbstractList<T> {
     }
 
     protected class MyListIterator implements ListIterator<T> {
+	Node left = head;
 
 		boolean hasNext() {// Tara
 	
