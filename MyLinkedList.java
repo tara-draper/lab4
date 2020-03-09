@@ -7,6 +7,7 @@
 //
 import java.util.AbstractList;
 import java.util.ListIterator;
+import java.util.NoSuchElementException;
 
 public class MyLinkedList<T> extends AbstractList<T> {
 
@@ -32,7 +33,7 @@ public class MyLinkedList<T> extends AbstractList<T> {
     }
 
     protected class MyListIterator implements ListIterator<T> {
-	Node left = head;
+    	Node left = head;
 
 		boolean hasNext() {// Tara
 	
@@ -46,12 +47,20 @@ public class MyLinkedList<T> extends AbstractList<T> {
 		// Return the next element in the list when going forward.
 		// Throw NoSuchElementException if there is no such element
 		boolean hasPrevious() {// charles
-			
+			if(left == head) {
+				return false;
+			}else {
+				return true;
+			}
 		}
 	
 		// Return true if there are more elements when going in the reverse direction.
-		T previous() {// charles
-			
+		T previous() throws NoSuchElementException { // charles
+			if(left==head) {
+				throw new NoSuchElementException();
+			}else {
+				return left.data;
+			}
 		}
 	
 		// Return the next element in the list when going backwards.
@@ -70,7 +79,7 @@ public class MyLinkedList<T> extends AbstractList<T> {
 		// previous()
 		// Return -1 if at the start of the list
 		void set(T x) {// charles
-	
+			
 		}
 	
 		// Change the value in the node returned by the most recent next/previous with
