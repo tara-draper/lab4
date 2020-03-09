@@ -7,6 +7,7 @@
 //
 import java.util.AbstractList;
 import java.util.ListIterator;
+import java.util.NoSuchElementException;
 
 public class MyLinkedList<T> extends AbstractList<T> {
 
@@ -33,18 +34,27 @@ public class MyLinkedList<T> extends AbstractList<T> {
 
     protected class MyListIterator implements ListIterator<T> {
 	Node left = head;
+	int index = 0;
 
-	boolean hasNext() {// Tara
+	public boolean hasNext() {// Tara
+	    if (left.next != null) {
+		return true;
+	    } else {
+		return false;
+	    }
+	}
+
+	public T next() throws NoSuchElementException {// Tara
+	    if (left.next == tail) {
+		throw new NoSuchElementException();
+	    } else {
+		left = left.next;
+		index++;
+		return left.data;
+	    }
 
 	}
 
-	// Return true if there are more elements when going in the forward direction.
-	T next() {// Tara
-
-	}
-
-	// Return the next element in the list when going forward.
-	// Throw NoSuchElementException if there is no such element
 	boolean hasPrevious() {// charles
 
 	}
@@ -56,19 +66,24 @@ public class MyLinkedList<T> extends AbstractList<T> {
 
 	// Return the next element in the list when going backwards.
 	// Throw NoSuchElementException if there is no such element
-	int nextIndex() {// Tara
+	public int nextIndex() {// Tara
+	    if (index == size) {
+		return size;
+	    } else {
+		return index + 1;
+	    }
 
 	}
 
-	// Return the index of the element that would be returned by a call to next()
-	// Return the list size if at the end of the list
-	int previousIndex() {// tara
+	public int previousIndex() {// tara
+	    if (left == head) {
+		return -1;
+	    } else {
+		return index;
+	    }
 
 	}
 
-	// Return the index of the element that would be returned by a call to
-	// previous()
-	// Return -1 if at the start of the list
 	void set(T x) {// charles
 
 	}
