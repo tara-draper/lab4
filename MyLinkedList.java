@@ -34,15 +34,8 @@ public class MyLinkedList<T> extends AbstractList<T> {
 
     protected class MyListIterator implements ListIterator<T> {
     	Node left = head;
+    	int index = 0;
 
-		boolean hasNext() {// Tara
-	
-		}
-	
-		// Return true if there are more elements when going in the forward direction.
-		T next() {// Tara
-	
-		}
 	
 		// Return the next element in the list when going forward.
 		// Throw NoSuchElementException if there is no such element
@@ -63,47 +56,76 @@ public class MyLinkedList<T> extends AbstractList<T> {
 			}
 		}
 	
-		// Return the next element in the list when going backwards.
-		// Throw NoSuchElementException if there is no such element
-		int nextIndex() {// Tara
 	
-		}
+		
 	
-		// Return the index of the element that would be returned by a call to next()
-		// Return the list size if at the end of the list
-		int previousIndex() {// tara
-	
-		}
-	
-		// Return the index of the element that would be returned by a call to
-		// previous()
-		// Return -1 if at the start of the list
-		void set(T x) {// charles
-			
-		}
-	
-		// Change the value in the node returned by the most recent next/previous with
-		// the new value.
-		// Throw an IllegalStateException if neither next nor previous were called
-		// Throw an IllegalStateException if add or remove have been called since the
-		// most recent next/previous
-		void remove() {// tara
-	
-		}
-	
-		// Remove the last element returned by the most recent call to either
-		// next/previous
-		// Throw an IllegalStateException if neither next nor previous were called
-		// Throw an IllegalStateException if add has been called since the most recent
-		// next/previous
-		void add(T x) {// charles
-	
-		}
-		// Insert the given item into the list immediately before whatever would have
-		// been returned by a call to next()
-		// The new item is inserted before the current cursor, so it would be returned
-		// by a call to previous() immediately following.
-		// The value of nextIndex or previousIndex both are increased by one
+
+	public boolean hasNext() {// Tara
+	    if (left.next != null) {
+		return true;
+	    } else {
+		return false;
+	    }
+	}
+
+	public T next() throws NoSuchElementException {// Tara
+	    if (left.next == tail) {
+		throw new NoSuchElementException();
+	    } else {
+		left = left.next;
+		index++;
+		return left.data;
+	    }
+
+	}
+
+	// Return the next element in the list when going backwards.
+	// Throw NoSuchElementException if there is no such element
+	public int nextIndex() {// Tara
+	    if (index == size) {
+		return size;
+	    } else {
+		return index + 1;
+	    }
+
+	}
+
+	public int previousIndex() {// tara
+	    if (left == head) {
+		return -1;
+	    } else {
+		return index;
+	    }
+
+	}
+
+	void set(T x) {// charles
+
+	}
+
+	// Change the value in the node returned by the most recent next/previous with
+	// the new value.
+	// Throw an IllegalStateException if neither next nor previous were called
+	// Throw an IllegalStateException if add or remove have been called since the
+	// most recent next/previous
+	void remove() {// tara
+
+	}
+
+	// Remove the last element returned by the most recent call to either
+	// next/previous
+	// Throw an IllegalStateException if neither next nor previous were called
+	// Throw an IllegalStateException if add has been called since the most recent
+	// next/previous
+	void add(T x) {// charles
+
+	}
+	// Insert the given item into the list immediately before whatever would have
+	// been returned by a call to next()
+	// The new item is inserted before the current cursor, so it would be returned
+	// by a call to previous() immediately following.
+	// The value of nextIndex or previousIndex both are increased by one
+>>>>>>> 5f2e12dfe17c409170722c807b6d588c9679183f
 
     }
 
