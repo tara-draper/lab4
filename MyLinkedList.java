@@ -39,7 +39,8 @@ public class MyLinkedList<T> extends AbstractList<T> {
 	
 		// Return the next element in the list when going forward.
 		// Throw NoSuchElementException if there is no such element
-		boolean hasPrevious() {// charles
+    	
+		public boolean hasPrevious() {// charles
 			if(left == head) {
 				return false;
 			}else {
@@ -48,7 +49,8 @@ public class MyLinkedList<T> extends AbstractList<T> {
 		}
 	
 		// Return true if there are more elements when going in the reverse direction.
-		T previous() throws NoSuchElementException { // charles
+		
+		public T previous() throws NoSuchElementException { // charles
 			if(left==head) {
 				throw new NoSuchElementException();
 			}else {
@@ -99,7 +101,7 @@ public class MyLinkedList<T> extends AbstractList<T> {
 
 	}
 
-	void set(T x) {// charles
+	public void set(T x) {// charles
 
 	}
 
@@ -108,7 +110,7 @@ public class MyLinkedList<T> extends AbstractList<T> {
 	// Throw an IllegalStateException if neither next nor previous were called
 	// Throw an IllegalStateException if add or remove have been called since the
 	// most recent next/previous
-	void remove() {// tara
+	public void remove() {// tara
 
 	}
 
@@ -117,7 +119,7 @@ public class MyLinkedList<T> extends AbstractList<T> {
 	// Throw an IllegalStateException if neither next nor previous were called
 	// Throw an IllegalStateException if add has been called since the most recent
 	// next/previous
-	void add(T x) {// charles
+	public void add(T x) {// charles
 
 	}
 	// Insert the given item into the list immediately before whatever would have
@@ -125,7 +127,6 @@ public class MyLinkedList<T> extends AbstractList<T> {
 	// The new item is inserted before the current cursor, so it would be returned
 	// by a call to previous() immediately following.
 	// The value of nextIndex or previousIndex both are increased by one
->>>>>>> 5f2e12dfe17c409170722c807b6d588c9679183f
 
     }
 
