@@ -117,8 +117,8 @@ public class MyLinkedList<T> extends AbstractList<T> {
     protected class MyListIterator implements ListIterator<T> {
     	Node left = head;
     	int index = 0;
-    	int modCountIterator = 0;
-    	int addCount = 0;
+    	int modCountIterator = modCountList;
+        boolean moved = false;
     	
 		public boolean hasPrevious() {
 			if(left == head) {
@@ -135,7 +135,7 @@ public class MyLinkedList<T> extends AbstractList<T> {
 				T item = left.data;
 				left = left.prev;
 				index--;
-				modCountList++;
+				moved = true;
 				return item;
 			}
 		}
@@ -154,7 +154,7 @@ public class MyLinkedList<T> extends AbstractList<T> {
 		    } else {
 		    	left = left.next;
 		    	index++;
-		    	modCountList++;
+		    	moved = true;
 		    	return left.data;
 		    }
 	
@@ -179,7 +179,7 @@ public class MyLinkedList<T> extends AbstractList<T> {
 		}
 	
 		public void set(T x) {
-			if() {
+			if(modCountIterator != modCountList || !moved) {
 				throw new IllegalStateException();
 			}else {
 				left.data = x;
@@ -192,7 +192,7 @@ public class MyLinkedList<T> extends AbstractList<T> {
 		// Throw an IllegalStateException if add or remove have been called since the
 		// most recent next/previous
 		public void remove() throws IllegalStateException{
-			if() {
+			if(modCountIterator != modCountList || !moved) {
 				throw new IllegalStateException();
 			}else {
 				Node right = this.left.next;
@@ -200,6 +200,7 @@ public class MyLinkedList<T> extends AbstractList<T> {
 				left.next = right;
 				right.prev = left;
 				this.left = left;
+				modList();
 			}
 		}
 	
@@ -218,13 +219,13 @@ public class MyLinkedList<T> extends AbstractList<T> {
 			node.prev = left;
 			left = left.next;
 			index++;
+			modList();
+		}
+		
+		private void modList() {
+			modCountIterator++;
 			modCountList++;
 		}
-		// Insert the given item into the list immediately before whatever would have
-		// been returned by a call to next()
-		// The new item is inserted before the current cursor, so it would be returned
-		// by a call to previous() immediately following.
-		// The value of nextIndex or previousIndex both are increased by one
 	
 	}
     //End ListIterator class
