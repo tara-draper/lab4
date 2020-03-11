@@ -22,6 +22,7 @@ public class MyLinkedList<T> extends AbstractList<T> {
 		tail.prev = head;
 		size = 0;
     }
+    
 
     private Node getNth(int index) {
 		Node node = head;
@@ -31,10 +32,12 @@ public class MyLinkedList<T> extends AbstractList<T> {
 		return node;
     }
 
+    
     public boolean add(T data) {
 		add(size, data);
 		return true;
     }
+    
 
     public void add(int index, T data) throws IndexOutOfBoundsException {
 		if (index > size) {
@@ -55,11 +58,13 @@ public class MyLinkedList<T> extends AbstractList<T> {
 		    size++;
 		}
     }
+    
 
     public T get(int i) {
 		Node node = getNth(i);
 		return node.data;
     }
+    
 
     public T set(int i, T data) {
 		Node node = getNth(i);
@@ -67,6 +72,7 @@ public class MyLinkedList<T> extends AbstractList<T> {
 		node.data = data;
 		return item;
     }
+    
 
     public T remove(int i) throws IndexOutOfBoundsException {
 		if (i > size - 1) {
@@ -82,6 +88,7 @@ public class MyLinkedList<T> extends AbstractList<T> {
 		    return item;
 		}
     }
+    
 
     public void clear() {
 		head = new Node();
@@ -90,6 +97,7 @@ public class MyLinkedList<T> extends AbstractList<T> {
 		tail.prev = head;
 		size = 0;
     }
+    
 
     public boolean isEmpty() {
 		if (size == 0) {
@@ -98,6 +106,7 @@ public class MyLinkedList<T> extends AbstractList<T> {
 		    return false;
 		}
     }
+    
 
     public int size() {
     	return size;
@@ -108,6 +117,8 @@ public class MyLinkedList<T> extends AbstractList<T> {
     protected class MyListIterator implements ListIterator<T> {
     	Node left = head;
     	int index = 0;
+    	int modCountIterator = 0;
+    	int addCount = 0;
     	
 		public boolean hasPrevious() {
 			if(left == head) {
