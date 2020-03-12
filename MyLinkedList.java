@@ -5,6 +5,7 @@
  */
 
 import java.util.AbstractList;
+import java.util.Iterator;
 import java.util.ListIterator;
 import java.util.NoSuchElementException;
 
@@ -14,6 +15,14 @@ public class MyLinkedList<T> extends AbstractList<T> {
     Node tail;
     int size;
     int modCountList = 0;
+    
+    public Iterator<T> QQQiterator(){
+    	return listIterator();
+    }
+    
+    public ListIterator<T> QQQlistIterator(){
+    	return new MyLinkedListIterator();
+    }
    
     public MyLinkedList() {
 		head = new Node();
@@ -114,11 +123,12 @@ public class MyLinkedList<T> extends AbstractList<T> {
 
 
     // ListIterator class
-    protected class MyListIterator implements ListIterator<T> {
+    protected class MyLinkedListIterator implements ListIterator<T> {
     	Node left = head;
     	int index = 0;
-    	int modCountIterator = 0;
-    	int addCount = 0;
+    	int modCountIterator = modCountList;
+        boolean moved = false;
+        boolean forward;
     	
 		public boolean hasPrevious() {
 			if(left == head) {
@@ -135,7 +145,8 @@ public class MyLinkedList<T> extends AbstractList<T> {
 				T item = left.data;
 				left = left.prev;
 				index--;
-				modCountList++;
+				moved = true;
+				forward = false;
 				return item;
 			}
 		}
@@ -154,7 +165,8 @@ public class MyLinkedList<T> extends AbstractList<T> {
 		    } else {
 		    	left = left.next;
 		    	index++;
-		    	modCountList++;
+		    	moved = true;
+		    	forward = true;
 		    	return left.data;
 		    }
 	
@@ -179,10 +191,14 @@ public class MyLinkedList<T> extends AbstractList<T> {
 		}
 	
 		public void set(T x) {
-			if() {
+			if(modCountIterator != modCountList || !moved) {
 				throw new IllegalStateException();
 			}else {
-				left.data = x;
+				if(forward) {
+					left.data = x;
+				}else {
+					left.next.data = x;
+				}
 			}
 		}
 	
@@ -192,14 +208,25 @@ public class MyLinkedList<T> extends AbstractList<T> {
 		// Throw an IllegalStateException if add or remove have been called since the
 		// most recent next/previous
 		public void remove() throws IllegalStateException{
-			if() {
+			if(modCountIterator != modCountList || !moved) {
 				throw new IllegalStateException();
 			}else {
-				Node right = this.left.next;
-				Node left = this.left.prev;
-				left.next = right;
-				right.prev = left;
-				this.left = left;
+				Node right;
+				Node left;
+				if(forward) {
+					right = this.left.next;
+					left = this.left.prev;
+					left.next = right;
+					right.prev = left;
+					this.left = left;
+				}else {
+					left = this.left;
+					right = this.left.next.next;
+					left.next = right;
+					right.prev = left;
+					this.left = left;
+				}
+				modList();
 			}
 		}
 	
@@ -218,13 +245,13 @@ public class MyLinkedList<T> extends AbstractList<T> {
 			node.prev = left;
 			left = left.next;
 			index++;
+			modList();
+		}
+		
+		private void modList() {
+			modCountIterator++;
 			modCountList++;
 		}
-		// Insert the given item into the list immediately before whatever would have
-		// been returned by a call to next()
-		// The new item is inserted before the current cursor, so it would be returned
-		// by a call to previous() immediately following.
-		// The value of nextIndex or previousIndex both are increased by one
 	
 	}
     //End ListIterator class
