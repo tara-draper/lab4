@@ -5,6 +5,7 @@
  */
 
 import java.util.AbstractList;
+import java.util.Iterator;
 import java.util.ListIterator;
 import java.util.NoSuchElementException;
 
@@ -14,6 +15,14 @@ public class MyLinkedList<T> extends AbstractList<T> {
     Node tail;
     int size;
     int modCountList = 0;
+    
+    public Iterator<T> QQQiterator(){
+    	return listIterator();
+    }
+    
+    public ListIterator<T> QQQlistIterator(){
+    	return new MyLinkedListIterator();
+    }
    
     public MyLinkedList() {
 		head = new Node();
@@ -114,11 +123,12 @@ public class MyLinkedList<T> extends AbstractList<T> {
 
 
     // ListIterator class
-    protected class MyListIterator implements ListIterator<T> {
+    protected class MyLinkedListIterator implements ListIterator<T> {
     	Node left = head;
     	int index = 0;
     	int modCountIterator = modCountList;
         boolean moved = false;
+        boolean forward;
     	
 		public boolean hasPrevious() {
 			if(left == head) {
@@ -136,6 +146,7 @@ public class MyLinkedList<T> extends AbstractList<T> {
 				left = left.prev;
 				index--;
 				moved = true;
+				forward = false;
 				return item;
 			}
 		}
@@ -155,6 +166,7 @@ public class MyLinkedList<T> extends AbstractList<T> {
 		    	left = left.next;
 		    	index++;
 		    	moved = true;
+		    	forward = true;
 		    	return left.data;
 		    }
 	
@@ -182,7 +194,11 @@ public class MyLinkedList<T> extends AbstractList<T> {
 			if(modCountIterator != modCountList || !moved) {
 				throw new IllegalStateException();
 			}else {
-				left.data = x;
+				if(forward) {
+					left.data = x;
+				}else {
+					left.next.data = x;
+				}
 			}
 		}
 	
@@ -195,11 +211,21 @@ public class MyLinkedList<T> extends AbstractList<T> {
 			if(modCountIterator != modCountList || !moved) {
 				throw new IllegalStateException();
 			}else {
-				Node right = this.left.next;
-				Node left = this.left.prev;
-				left.next = right;
-				right.prev = left;
-				this.left = left;
+				Node right;
+				Node left;
+				if(forward) {
+					right = this.left.next;
+					left = this.left.prev;
+					left.next = right;
+					right.prev = left;
+					this.left = left;
+				}else {
+					left = this.left;
+					right = this.left.next.next;
+					left.next = right;
+					right.prev = left;
+					this.left = left;
+				}
 				modList();
 			}
 		}
