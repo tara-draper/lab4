@@ -116,7 +116,7 @@ public class MyLinkedList<T> extends AbstractList<T> {
     // ListIterator class
     protected class MyLinkedListIterator implements ListIterator<T> {
     	Node left = head;
-    	int index = 0;
+    	int index = -1;
     	int modCountIterator = modCountList;
         boolean moved = false;
         boolean forward;
@@ -173,15 +173,10 @@ public class MyLinkedList<T> extends AbstractList<T> {
 		}
 	
 		public int previousIndex() {
-		    if (left == head) {
-		    	return -1;
-		    } else {
-		    	return index;
-		    }
-	
+		    return index;
 		}
 	
-		public void set(T x) {
+		public void set(T x) throws IllegalStateException{
 			if(modCountIterator != modCountList || !moved) {
 				throw new IllegalStateException();
 			}else {
@@ -205,6 +200,7 @@ public class MyLinkedList<T> extends AbstractList<T> {
 					left.next = right;
 					right.prev = left;
 					this.left = left;
+					index--;
 				}else {
 					left = this.left;
 					right = this.left.next.next;
@@ -212,6 +208,7 @@ public class MyLinkedList<T> extends AbstractList<T> {
 					right.prev = left;
 					this.left = left;
 				}
+				size--;
 				modList();
 			}
 		}
@@ -223,8 +220,8 @@ public class MyLinkedList<T> extends AbstractList<T> {
 			right.prev = node;
 			node.next = right;
 			node.prev = left;
-			left = left.next;
-			index++;
+			next();
+			size++;
 			modList();
 		}
 		
