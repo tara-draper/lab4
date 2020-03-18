@@ -14,10 +14,10 @@ public class MyLinkedList<T> extends AbstractList<T> {
     Node head;
     Node tail;
     int size;
-    int modCountList = 0;
+    int modCountList;
     
     public Iterator<T> QQQiterator(){
-    	return listIterator();
+    	return QQQlistIterator();
     }
     
     public ListIterator<T> QQQlistIterator(){
@@ -30,9 +30,9 @@ public class MyLinkedList<T> extends AbstractList<T> {
 		head.next = tail;
 		tail.prev = head;
 		size = 0;
+		modCountList = 0;
     }
     
-
     private Node getNth(int index) {
 		Node node = head;
 		for (int i = 0; i <= index; i++) {
@@ -41,13 +41,11 @@ public class MyLinkedList<T> extends AbstractList<T> {
 		return node;
     }
 
-    
     public boolean add(T data) {
 		add(size, data);
 		return true;
     }
     
-
     public void add(int index, T data) throws IndexOutOfBoundsException {
 		if (index > size) {
 		    throw new IndexOutOfBoundsException();
@@ -68,13 +66,11 @@ public class MyLinkedList<T> extends AbstractList<T> {
 		}
     }
     
-
     public T get(int i) {
 		Node node = getNth(i);
 		return node.data;
     }
     
-
     public T set(int i, T data) {
 		Node node = getNth(i);
 		T item = node.data;
@@ -82,7 +78,6 @@ public class MyLinkedList<T> extends AbstractList<T> {
 		return item;
     }
     
-
     public T remove(int i) throws IndexOutOfBoundsException {
 		if (i > size - 1) {
 		    throw new IndexOutOfBoundsException();
@@ -98,7 +93,6 @@ public class MyLinkedList<T> extends AbstractList<T> {
 		}
     }
     
-
     public void clear() {
 		head = new Node();
 		tail = new Node();
@@ -107,7 +101,6 @@ public class MyLinkedList<T> extends AbstractList<T> {
 		size = 0;
     }
     
-
     public boolean isEmpty() {
 		if (size == 0) {
 		    return true;
@@ -116,16 +109,14 @@ public class MyLinkedList<T> extends AbstractList<T> {
 		}
     }
     
-
     public int size() {
     	return size;
     }
 
-
     // ListIterator class
     protected class MyLinkedListIterator implements ListIterator<T> {
     	Node left = head;
-    	int index = 0;
+    	int index = -1;
     	int modCountIterator = modCountList;
         boolean moved = false;
         boolean forward;
@@ -182,15 +173,10 @@ public class MyLinkedList<T> extends AbstractList<T> {
 		}
 	
 		public int previousIndex() {
-		    if (left == head) {
-		    	return -1;
-		    } else {
-		    	return index;
-		    }
-	
+		    return index;
 		}
 	
-		public void set(T x) {
+		public void set(T x) throws IllegalStateException{
 			if(modCountIterator != modCountList || !moved) {
 				throw new IllegalStateException();
 			}else {
@@ -202,11 +188,6 @@ public class MyLinkedList<T> extends AbstractList<T> {
 			}
 		}
 	
-		// Change the value in the node returned by the most recent next/previous with
-		// the new value.
-		// Throw an IllegalStateException if neither next nor previous were called
-		// Throw an IllegalStateException if add or remove have been called since the
-		// most recent next/previous
 		public void remove() throws IllegalStateException{
 			if(modCountIterator != modCountList || !moved) {
 				throw new IllegalStateException();
@@ -219,6 +200,7 @@ public class MyLinkedList<T> extends AbstractList<T> {
 					left.next = right;
 					right.prev = left;
 					this.left = left;
+					index--;
 				}else {
 					left = this.left;
 					right = this.left.next.next;
@@ -226,16 +208,11 @@ public class MyLinkedList<T> extends AbstractList<T> {
 					right.prev = left;
 					this.left = left;
 				}
+				size--;
 				modList();
 			}
 		}
 	
-		// Remove the last element returned by the most recent call to either
-		// next/previous
-		// Throw an IllegalStateException if neither next nor previous were called
-		// Throw an IllegalStateException if add has been called since the most recent
-		// next/previous
-		
 		public void add(T x) {
 			Node node = new Node(x);
 			Node right = left.next;
@@ -243,8 +220,8 @@ public class MyLinkedList<T> extends AbstractList<T> {
 			right.prev = node;
 			node.next = right;
 			node.prev = left;
-			left = left.next;
-			index++;
+			next();
+			size++;
 			modList();
 		}
 		
