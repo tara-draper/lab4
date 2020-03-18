@@ -74,7 +74,7 @@ public class MyLinkedListTest {
 		for (int i = 0; i < 10; i++) {
 		    list.add(i);
 		}
-		ListIterator<Integer> myIterator = list.QQQlistIterator();
+		ListIterator<Integer> myIterator = list.listIterator();
 		assertTrue(myIterator.hasNext());
 		assertEquals("first index is zero", 0, myIterator.nextIndex());
 		assertTrue(!myIterator.hasPrevious());
@@ -93,14 +93,14 @@ public class MyLinkedListTest {
     @Test(expected=NoSuchElementException.class)
     public void testIteratorInvalidNext() {
     	MyLinkedList<Integer> list = new MyLinkedList<Integer>();
-		ListIterator<Integer> myIterator = list.QQQlistIterator();
+		ListIterator<Integer> myIterator = list.listIterator();
 		myIterator.next();
     }
     
     @Test(expected=NoSuchElementException.class)
     public void testIteratorInvalidPrevious() {
     	MyLinkedList<Integer> list = new MyLinkedList<Integer>();
-		ListIterator<Integer> myIterator = list.QQQlistIterator();
+		ListIterator<Integer> myIterator = list.listIterator();
 		myIterator.previous();
     }
     
@@ -110,7 +110,7 @@ public class MyLinkedListTest {
 		for (int i = 0; i < 10; i++) {
 		    list.add(i);
 		}
-		ListIterator<Integer> myIterator = list.QQQlistIterator();
+		ListIterator<Integer> myIterator = list.listIterator();
 		myIterator.remove();
     }
     
@@ -120,7 +120,7 @@ public class MyLinkedListTest {
 		for (int i = 0; i < 10; i++) {
 		    list.add(i);
 		}
-		ListIterator<Integer> myIterator = list.QQQlistIterator();
+		ListIterator<Integer> myIterator = list.listIterator();
 		myIterator.set(20);
     }
     
@@ -130,10 +130,10 @@ public class MyLinkedListTest {
 		for (int i = 0; i < 10; i++) {
 		    list.add(i);
 		}
-		ListIterator<Integer> iterator1 = list.QQQlistIterator();
+		ListIterator<Integer> iterator1 = list.listIterator();
 		iterator1.next();
 		iterator1.next();
-		ListIterator<Integer> iterator2 = list.QQQlistIterator();
+		ListIterator<Integer> iterator2 = list.listIterator();
 		iterator2.next();
 		iterator2.remove();
 		iterator1.set(100);
@@ -145,10 +145,10 @@ public class MyLinkedListTest {
 		for (int i = 0; i < 10; i++) {
 		    list.add(i);
 		}
-		ListIterator<Integer> iterator1 = list.QQQlistIterator();
+		ListIterator<Integer> iterator1 = list.listIterator();
 		iterator1.next();
 		iterator1.next();
-		ListIterator<Integer> iterator2 = list.QQQlistIterator();
+		ListIterator<Integer> iterator2 = list.listIterator();
 		iterator2.add(50);
 		iterator1.remove();
 
@@ -161,7 +161,7 @@ public class MyLinkedListTest {
 		    list.add(i);
 		}
 		assertEquals("list is size 10", 10, list.size());
-		ListIterator<Integer> myIterator = list.QQQlistIterator();
+		ListIterator<Integer> myIterator = list.listIterator();
 		myIterator.add(50);
 		assertEquals("list size is 11", 11, list.size());
 		assertEquals("moved the cursor", 1, myIterator.nextIndex());
@@ -178,7 +178,7 @@ public class MyLinkedListTest {
 		    list.add(i);
 		}
 		assertEquals("list is size 10", 10, list.size());
-		ListIterator<Integer> myIterator = list.QQQlistIterator();
+		ListIterator<Integer> myIterator = list.listIterator();
 		myIterator.next();
 		myIterator.next();
 		myIterator.remove();
@@ -200,7 +200,7 @@ public class MyLinkedListTest {
 		for (int i = 0; i < 10; i++) {
 		    list.add(i);
 		}
-		ListIterator<Integer> myIterator = list.QQQlistIterator();
+		ListIterator<Integer> myIterator = list.listIterator();
 		myIterator.next();
 		myIterator.set(50);
 		int num = myIterator.previous();

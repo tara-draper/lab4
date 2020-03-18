@@ -16,11 +16,11 @@ public class MyLinkedList<T> extends AbstractList<T> {
     int size;
     int modCountList;
     
-    public Iterator<T> QQQiterator(){
-    	return QQQlistIterator();
+    public Iterator<T> iterator(){
+    	return listIterator();
     }
     
-    public ListIterator<T> QQQlistIterator(){
+    public ListIterator<T> listIterator(){
     	return new MyLinkedListIterator();
     }
    
